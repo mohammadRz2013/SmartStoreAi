@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:19rc2-trixie
+    container_name: my_postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: BigMmd1392
+      POSTGRES_DB: testdb
+
+    ports:
+      - "7001:5432"
+
+    volumes:
+      - postgres_data_v19:/var/lib/postgresql
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: my_qdrant
+    restart: always
+
+    ports:
+      - "7000:6333"
+      - "7002:6334"
+
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  postgres_data_v19:
+  qdrant_data:
